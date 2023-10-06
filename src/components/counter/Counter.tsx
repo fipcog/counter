@@ -4,10 +4,10 @@ import { Button } from "../btn/Btn";
 import "./CounterStyles.scss";
 
 export const Counter: React.FC = () => {
-    let [count, setCount] = useState<number>(0)
+    const [count, setCount] = useState<number>(0)
 
     const incrCount = (): void => {
-        setCount(++count)
+        setCount(count + 1)
     }
 
     const resetCount = (): void => {
