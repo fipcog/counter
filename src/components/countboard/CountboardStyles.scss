@@ -1,0 +1,18 @@
+.countboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 85%;
+    height: 50%;
+
+    font-size: 3em;
+    font-weight: bold;
+
+    background-color: white;
+    border-radius: 10px;
+
+    &.limit {
+        color: red;
+    }
+}
