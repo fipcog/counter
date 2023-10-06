@@ -6,11 +6,11 @@ import "./CounterStyles.scss";
 export const Counter: React.FC = () => {
     let [count, setCount] = useState<number>(0)
 
-    const incrCount = () => {
+    const incrCount = (): void => {
         setCount(++count)
     }
 
-    const resetCount = () => {
+    const resetCount = (): void => {
         setCount(0)
     }
 
