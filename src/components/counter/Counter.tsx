@@ -4,10 +4,12 @@ import { Button } from "../btn/Btn";
 import "./CounterStyles.scss";
 
 export const Counter: React.FC = () => {
-    const [count, setCount] = useState<number>(0)
+    const initialCount = 0
+    const limitCount = 5
+    const [count, setCount] = useState<number>(initialCount)
 
     const incrCount = (): void => {
-        setCount(count + 1)
+        if (count < limitCount) setCount(count + 1)
     }
 
     const resetCount = (): void => {
@@ -16,8 +18,8 @@ export const Counter: React.FC = () => {
 
     return (
         <div className="counter">
-            <Countboard>{count}</Countboard>
-            <Button callback={incrCount} disabled={count >= 5}>INCREMENT</Button>
+            <Countboard limitCount={limitCount}>{count}</Countboard>
+            <Button callback={incrCount} disabled={count >= limitCount}>INCREMENT</Button>
             <Button callback={resetCount} disabled={!count}>RESET</Button>
         </div>
     )
