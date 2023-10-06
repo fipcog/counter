@@ -15,7 +15,7 @@
         background-color: rgb(244, 250, 255);
     }
 
-    &:active {
+    &:not(:disabled):active {
         transform: translateY(2px);
     }
 }
