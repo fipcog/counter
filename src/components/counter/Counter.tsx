@@ -3,9 +3,12 @@ import { Countboard } from "../countboard/Countboard";
 import { Button } from "../btn/Btn";
 import "./CounterStyles.scss";
 
-export const Counter: React.FC = () => {
-    const initialCount = 0
-    const limitCount = 5
+type CounterPropsTypes = {
+    initialCount: number
+    limitCount: number
+}
+
+export const Counter: React.FC<CounterPropsTypes> = ({initialCount, limitCount}) => {
     const [count, setCount] = useState<number>(initialCount)
 
     const incrCount = (): void => {
@@ -13,7 +16,7 @@ export const Counter: React.FC = () => {
     }
 
     const resetCount = (): void => {
-        setCount(0)
+        setCount(initialCount)
     }
 
     return (
