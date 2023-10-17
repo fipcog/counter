@@ -1,0 +1,22 @@
+.field_label {
+    display: flex;
+    flex-direction: row;
+
+    font-weight: bold;
+    color: #fff
+}
+
+.field {
+    max-width: 60px;
+    margin-left: 10px;
+
+    border-radius: 10px;
+    border-color: transparent;
+    text-align: center;
+
+    outline-color: cornflowerblue;
+}
+
+.error {
+    background-color: red;
+}

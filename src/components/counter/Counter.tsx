@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Countboard } from "../countboard/Countboard";
 import { Button } from "../btn/Btn";
 import "./CounterStyles.scss";
+import { ErrorType } from "../../App";
 
 type CounterPropsTypes = {
     initialCount: number
     limitCount: number
+    error: ErrorType
 }
 
-export const Counter: React.FC<CounterPropsTypes> = ({initialCount, limitCount}) => {
+export const Counter: React.FC<CounterPropsTypes> = ({initialCount, limitCount, error}) => {
     const [count, setCount] = useState<number>(initialCount)
+
+    useEffect(() => {
+        setCount(initialCount)
+    }, [initialCount])
+
+    const shouldBtnIncrDisable = (count >= limitCount) || error ? true : false
+    const shouldBtnResetDisable = (count - initialCount === 0) || error ? true : false
 
     const incrCount = (): void => {
         if (count < limitCount) setCount(count + 1)
@@ -21,9 +30,9 @@ export const Counter: React.FC<CounterPropsTypes> = ({initialCount, limitCount})
 
     return (
         <div className="counter">
-            <Countboard limitCount={limitCount}>{count}</Countboard>
-            <Button callback={incrCount} disabled={count >= limitCount}>INCREMENT</Button>
-            <Button callback={resetCount} disabled={!count}>RESET</Button>
+            <Countboard limitCount={limitCount} error={error}>{count}</Countboard>
+            <Button callback={incrCount} disabled={shouldBtnIncrDisable}>INCREMENT</Button>
+            <Button callback={resetCount} disabled={shouldBtnResetDisable}>RESET</Button>
         </div>
     )
 }
