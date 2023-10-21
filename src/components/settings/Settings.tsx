@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./SettingsStyles.scss";
-import { NumberInput } from "../numberinput/NumberInput";
+import { NumberInput } from "./numberinput/NumberInput";
 import { Button } from "../btn/Btn";
 import { ErrorType } from "../../App";
 
@@ -35,12 +35,15 @@ export const Settings: React.FC<SettingsPropsTypes> = (props) => {
         if(isValuesCorrect) setError('')
         if(!isValueSetted) setError('unsetted')
         if(!isValuesCorrect) setError('incorrect')
-    })
+    }, [isValuesCorrect, isValueSetted])
 
     const setCountsHandler =  ():void => {
         if(!isValueSetted && isValuesCorrect) {
             setInitCount(initNum)
+            localStorage.setItem('initCount', JSON.stringify(initNum))
+            localStorage.setItem('countValue', JSON.stringify(initNum))
             setLimitCount(limitNum)
+            localStorage.setItem('limitCount', JSON.stringify(limitNum))
             setError('')
         }
     }

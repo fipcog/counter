@@ -6,8 +6,15 @@ import { Settings } from './components/settings/Settings';
 export type ErrorType = '' | 'incorrect' | 'unsetted'
 
 function App() {
-  const defaultInitCount = 0
-  const defaultLimitCount = 5
+  let defaultInitCount = 0
+  let localStorInitCount= localStorage.getItem('initCount')
+  if (localStorInitCount) defaultInitCount = JSON.parse(localStorInitCount) 
+
+  let defaultLimitCount = 5
+  let localStorLimitCount = localStorage.getItem('limitCount')
+  if (localStorLimitCount) defaultLimitCount = JSON.parse(localStorLimitCount) 
+
+
   const [initialCount, setInitialCount] = useState<number>(defaultInitCount)
   const [limitCount, setLimitCount] = useState<number>(defaultLimitCount)
   const [error, setError] = useState<ErrorType>('')

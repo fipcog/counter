@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Countboard } from "../countboard/Countboard";
+import { Countboard } from "./countboard/Countboard";
 import { Button } from "../btn/Btn";
 import "./CounterStyles.scss";
 import { ErrorType } from "../../App";
@@ -17,15 +17,32 @@ export const Counter: React.FC<CounterPropsTypes> = ({initialCount, limitCount, 
         setCount(initialCount)
     }, [initialCount])
 
+    useEffect(() => {
+        if(count !== initialCount) {
+            localStorage.setItem('countValue', JSON.stringify(count))
+        }
+    }, [count])
+
+    useEffect(() => {
+        const localStorCount = localStorage.getItem('countValue')
+        if(localStorCount) {
+            setCount(JSON.parse(localStorCount))
+            console.log(JSON.parse(localStorCount))
+        }
+    }, [])
+
     const shouldBtnIncrDisable = (count >= limitCount) || error ? true : false
     const shouldBtnResetDisable = (count - initialCount === 0) || error ? true : false
 
     const incrCount = (): void => {
-        if (count < limitCount) setCount(count + 1)
+        if (count < limitCount) {
+            setCount(count + 1)
+        }
     }
 
     const resetCount = (): void => {
         setCount(initialCount)
+        localStorage.setItem('countValue', JSON.stringify(initialCount))
     }
 
     return (
