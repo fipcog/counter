@@ -4,13 +4,12 @@ import "./NumberInputStyles.scss"
 type NumberInputPropsTypes = {
     fieldName: string
     value: number
-    equal: boolean
+    className: string
     callback: (num: number) => void
 }
 
 export const NumberInput: React.FC<NumberInputPropsTypes> = (props) => {
-    const {fieldName, value, equal, callback} = props
-    const inputClassName = ((value >= 0) && !equal) ? "field" : "field error"
+    const {fieldName, value, className, callback} = props
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         callback(Number(e.currentTarget.value))
@@ -21,7 +20,7 @@ export const NumberInput: React.FC<NumberInputPropsTypes> = (props) => {
             {fieldName + ':'}
 
             <input 
-                className={inputClassName}
+                className={className}
                 type="number" 
                 value={value} 
                 onChange={onChangeHandler}/>
